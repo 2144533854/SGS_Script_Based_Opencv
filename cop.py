@@ -19,15 +19,15 @@ NumPic_for_Award = os.path.join(Bath_Path,'pictures','number')
 Local_Screenshots_Path = r'C:\Users\st\Documents\雷电模拟器\Pictures\Screenshots'
 print('-------脚本配置初始化-------')
 if not os.path.exists(Local_Screenshots_Path):
-    print(f'第一次使用请修改用户名  \n将CONFIG.py文件 第10行代码   {Local_Screenshots_Path}   中C:\\Users\\ 后面改为自己用户名名称\n')
+    print(f'第一次使用请修改用户名  \n将cop.py文件 第19行代码   {Local_Screenshots_Path}   中C:\\Users\\ 后面改为自己用户名名称\n')
 DELAY=2
 print(f'点击操作默认延迟为2秒，当前为{DELAY}秒 如果需要更改，请修改CONFIG.py文件第14行代码 DELAY={DELAY}\n')
 
 ldconsole_exe = 'D:\\Changzhi\\dnplayer2\\ldconsole.exe '
 ld_exe = 'D:\\Changzhi\\dnplayer2\\ld.exe '
-print(f'请根据自己电脑配置,找到雷电模拟器的ldconsole.exe和ld.exe路径，如何和当前路径不符，请去将CONFIG.py文件 第17、18行代码修改 \n\n当前路径为{ldconsole_exe}  {ld_exe}')
+print(f'请根据自己电脑配置,找到雷电模拟器的ldconsole.exe和ld.exe路径，如何和当前路径不符，请去将cop.py文件 第26、27行代码修改 \n\n当前路径为{ldconsole_exe}  {ld_exe}')
 
-print('-------脚本配置初始化结束-------\n')
+print('-------脚本配置初始化结束-------')
 
 
 

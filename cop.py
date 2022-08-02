@@ -2,15 +2,74 @@ import time
 
 import numpy as np
 
-from sgs.CONFIG import Real_Screenshots_Path, Real_source_Path, NumPic_for_Award, DELAY
-from sgs.sc import Dnconsole
 import cv2
 import shutil
 import os
 import time
 from datetime import datetime, timedelta
-from sgs.CONFIG import Real_Screenshots_Path, Real_source_Path
 
+import os
+
+Bath_Path=os.path.abspath(__file__).replace('CONFIG.py','')
+
+Real_Screenshots_Path =os.path.join(Bath_Path,'pictures','Screenshots')
+Real_source_Path = os.path.join(Bath_Path,'pictures','source')
+NumPic_for_Award = os.path.join(Bath_Path,'pictures','number')
+
+Local_Screenshots_Path = r'C:\Users\st\Documents\雷电模拟器\Pictures\Screenshots'
+print('-------脚本配置初始化-------')
+if not os.path.exists(Local_Screenshots_Path):
+    print(f'第一次使用请修改用户名  \n将CONFIG.py文件 第10行代码   {Local_Screenshots_Path}   中C:\\Users\\ 后面改为自己用户名名称\n')
+DELAY=2
+print(f'点击操作默认延迟为2秒，当前为{DELAY}秒 如果需要更改，请修改CONFIG.py文件第14行代码 DELAY={DELAY}\n')
+
+ldconsole_exe = 'D:\\Changzhi\\dnplayer2\\ldconsole.exe '
+ld_exe = 'D:\\Changzhi\\dnplayer2\\ld.exe '
+print(f'请根据自己电脑配置,找到雷电模拟器的ldconsole.exe和ld.exe路径，如何和当前路径不符，请去将CONFIG.py文件 第17、18行代码修改 \n\n当前路径为{ldconsole_exe}  {ld_exe}')
+
+print('-------脚本配置初始化结束-------\n')
+
+
+
+
+
+
+class Dnconsole:
+    # 请根据自己电脑配置
+    console = ldconsole_exe
+    ld = ld_exe
+    share_path = Local_Screenshots_Path
+
+    def copy_img(self, s):
+        name = os.path.join(Real_Screenshots_Path, s)
+        shutil.copy(name, Real_source_Path)
+
+    @staticmethod
+    def launch(index: int):
+        cmd = Dnconsole.console + 'launch --index ' + str(index)
+        process = os.popen(cmd)
+        result = process.read()
+        process.close()
+        return result
+
+    @staticmethod
+    def dnld(index: int, command: str, silence: bool = True):
+        cmd = Dnconsole.ld + '-s %d "%s"' % (index, command)
+        # print(cmd)
+        if silence:
+            os.system(cmd)
+            return ''
+        process = os.popen(cmd)
+        result = process.read()
+        process.close()
+        return result
+
+    @staticmethod
+    def touch(index: int, x: int, y: int, delay: int = 0):
+        if delay == 0:
+            Dnconsole.dnld(index, 'input tap %d %d' % (x, y))
+        else:
+            Dnconsole.dnld(index, 'input swipe %d %d %d %d %d' % (x, y, x, y, delay))
 def copy_img(s):
     name = os.path.join(Real_Screenshots_Path, s)
     shutil.copy(name, Real_source_Path)
